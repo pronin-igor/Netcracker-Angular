@@ -1,0 +1,88 @@
+<hr>
+
+<button (click)="showAddForm()">Добавить студента</button>
+<button (click)="showEditForm()">Редактировать студента</button>
+
+<form novalidate [formGroup]="addFormModel" [hidden]="this.addFormIsShown">
+  <div formGroupName="person">
+  <label for="addName">Имя</label>
+  <input formControlName="name" id="addName">
+    <div class="alert" *ngIf="this.addFormModel.get('person')?.get('name')?.getError('required')">
+     Поле 'Имя' обязательно для заполнения
+    </div>
+    <br>
+  <label for="addSurname">Фамилия</label>
+  <input formControlName="surname" id="addSurname">
+    <div class="alert" *ngIf="this.addFormModel.get('person')?.get('surname')?.getError('required')">
+      Поле 'Фамилия' обязательно для заполнения
+    </div>
+    <br>
+  <label for="addPatronymic">Отчество</label>
+  <input formControlName="patronymic" id="addPatronymic">
+    <div class="alert" *ngIf="this.addFormModel.get('person')?.get('patronymic')?.getError('required')">
+      Поле 'Отчество' обязательно для заполнения
+    </div>
+    <div class="alert" *ngIf="this.addFormModel.get('person')?.getError('wrongName')">
+      Поле 'Имя' не должно совпадать с полем 'Фамилия' или полем 'Отчество'
+    </div>
+    <br>
+  </div>
+  <label for="addBirthday">День Рождения</label>
+  <input type="date" formControlName="birthday" id="addBirthday">
+    <div class="alert" *ngIf="this.addFormModel.get('birthday')?.getError('wrongDate')">
+    Вам должно быть больше 10 лет
+    </div>
+    <br>
+  <label for="addGrade">Оценка</label>
+  <input formControlName="grade" id="addGrade">
+    <div class="alert" *ngIf="this.addFormModel.get('grade')?.getError('pattern')">
+    Оценка должна быть в диапазоне[1,5]
+    </div>
+</form>
+<button (click)="addUser()" [hidden]="this.addFormIsShown" [disabled]="!this.addFormModel.valid">Добавить</button>
+
+<select id="userSelect" [hidden]="this.editFormSelectIsShown" (change)="selectOption($event)">
+  <option *ngFor="let user of this.usersInfo" [value]="user.id" [text]="user.name + ' ' + user.surname + ' ' + user.patronymic"></option>
+</select>
+
+<form novalidate [formGroup]="editFormModel" [hidden]="this.editFormIsShown">
+  <div formGroupName="person">
+    <label for="editName">Имя</label>
+    <input formControlName="name" id="editName">
+    <div class="alert" *ngIf="this.editFormModel.get('person')?.get('name')?.getError('required')">
+      Поле 'Имя' обязательно для заполнения
+    </div>
+    <br>
+    <label for="editSurname">Фамилия</label>
+    <input formControlName="surname" id="editSurname">
+    <div class="alert" *ngIf="this.editFormModel.get('person')?.get('surname')?.getError('required')">
+      Поле 'Фамилия' обязательно для заполнения
+    </div>
+    <br>
+    <label for="editPatronymic">Отчество</label>
+    <input formControlName="patronymic" id="editPatronymic">
+    <div class="alert" *ngIf="this.editFormModel.get('person')?.get('patronymic')?.getError('required')">
+      Поле 'Отчество' обязательно для заполнения
+    </div>
+    <div class="alert" *ngIf="this.editFormModel.get('person')?.getError('wrongName')">
+      Поле 'Имя' не должно совпадать с полем 'Фамилия' или полем 'Отчество'
+    </div>
+    <br>
+  </div>
+  <label for="editBirthday">День Рождения</label>
+  <input type="date" formControlName="birthday" id="editBirthday">
+  <div class="alert" *ngIf="this.editFormModel.get('birthday')?.getError('wrongDate')">
+    Вам должно быть больше 10 лет
+  </div>
+  <br>
+  <label for="editGrade">Оценка</label>
+  <input formControlName="grade" id="editGrade">
+  <div class="alert" *ngIf="this.editFormModel.get('grade')?.getError('pattern')">
+    Оценка должна быть в диапазоне[1,5]
+  </div>
+</form>
+<button (click)="editUser()" [hidden]="this.editFormIsShown" [disabled]="!this.editFormModel.valid || this.selectedUserId === -1">Отредактировать</button>
+<div class="alert" *ngIf="this.selectedUserId === -1" [hidden]="this.editFormIsShown">
+  Выберите пользователя из списка для редактирования
+</div>
+

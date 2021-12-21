@@ -1,0 +1,39 @@
+<div class="container">
+  <table class="table">
+    <tr><th>Name <button (click)="sortName()">Sort</button></th><th>Surname <button (click)="sortSurname()">Sort</button></th>
+      <th>Patronymic <button (click)="sortPatronymic()">Sort</button></th><th>Birthday <button (click)="sortBirthday()">Sort</button></th>
+      <th>Grade <button (click)="sortGrade()">Sort</button></th></tr>
+    <tr *ngFor="let user of _usersInfo"[class.gradeStyle]="getGrade(user.grade)" [class.nameStyle]="getName(user.name)"
+    [style.display]="getFilter(user.birthday, user.grade)">
+      <td >{{user.name}}</td>
+      <td>{{user.surname}}</td>
+      <td>{{user.patronymic}}</td>
+      <td>{{user.birthday.toLocaleDateString()}}</td>
+      <td>{{user.grade}}</td>
+    </tr>
+  </table>
+
+  <div class="inputs">
+    <button class="hilightButton" (click)="turn()">Подсветить оценки ниже 3</button>
+
+    <p>Найти по имени</p>
+    <input class="input" type="text" [(ngModel)]="name">
+
+    <p>Фильтрация студентов</p>
+    <p>По году рождения</p>
+    От<input type="date" [(ngModel)]="birthdayFrom"> До<input type="date" [(ngModel)]="birthdayTo">
+    <p>По оценке</p>
+    От<input type="text" [(ngModel)]="gridFrom"> До<input type="text" [(ngModel)]="gridTo">
+
+    <p>Удалить по фамилии</p>
+    <input type="text" [(ngModel)]="surnameToDelete">
+    <a href="#" id="main">
+      <div id="okno">
+        <p>Уверены, что хотите удалить ученика с фамилией {{surnameToDelete}}?</p>
+        <button (click)="deleteStudent(surnameToDelete)">Да</button>
+      </div>
+    </a>
+    <a href="#main" style="text-decoration: none; color: black">Удалить</a>
+  </div>
+</div>
+<app-reactice-forms [usersInfo]="_usersInfo"></app-reactice-forms>
