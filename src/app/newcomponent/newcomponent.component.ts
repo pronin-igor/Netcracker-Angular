@@ -8,7 +8,8 @@ import { Component, OnInit } from "@angular/core";
 export class NewcomponentComponent implements OnInit {
 
   constructor() {
-console.log();
+    this._addButtonIsShown = false;
+    this._editButtonIsShown = false;
 }
 
   ngOnInit(): void {
@@ -42,6 +43,8 @@ console.log();
   birthdaySorted = false;
   gradeSorted = false;
   surnameToDelete: string = "";
+  _addButtonIsShown: boolean;
+  _editButtonIsShown: boolean;
 
   turn(): void {
     this.hilight = !this.hilight;
@@ -175,6 +178,16 @@ array.splice(index, 1);
 array.splice(index, 1);
 }
     });
+  }
+
+  showAddButton(): void {
+    this._addButtonIsShown = true;
+    this._editButtonIsShown = false;
+  }
+
+  showEditButton(): void {
+    this._editButtonIsShown = true;
+    this._addButtonIsShown = false;
   }
 
 }

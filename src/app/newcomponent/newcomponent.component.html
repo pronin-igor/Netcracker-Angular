@@ -27,13 +27,24 @@
 
     <p>Удалить по фамилии</p>
     <input type="text" [(ngModel)]="surnameToDelete">
-    <a href="#" id="main">
-      <div id="okno">
+
+    <button class="buttonInBlock" (click)="textPopup.style.display='block';">Удалить</button>
+    <button class="buttonInBlock" (click)="groupPopup.style.display='block'; showAddButton()">Добавить студента</button>
+    <button class="buttonInBlock" (click)="groupPopup.style.display='block'; showEditButton()">Редактировать студента</button>
+
+    <div #textPopup class="popupStyle">
+      <div class="contentForText">
+        <span class="close" (click)="textPopup.style.display='none'">&times;</span>
         <p>Уверены, что хотите удалить ученика с фамилией {{surnameToDelete}}?</p>
-        <button (click)="deleteStudent(surnameToDelete)">Да</button>
+        <button (click)="deleteStudent(surnameToDelete); textPopup.style.display='none'">Да</button>
       </div>
-    </a>
-    <a href="#main" style="text-decoration: none; color: black">Удалить</a>
+    </div>
+
+    <div #groupPopup class="popupStyle">
+      <div class="contentForGroup">
+        <span class="close" (click)="groupPopup.style.display='none'">&times;</span>
+        <app-reactice-forms [usersInfo]="_usersInfo" [addButtonIsShown]="_addButtonIsShown"[editButtonIsShown]="_editButtonIsShown"></app-reactice-forms>
+      </div>
+    </div>
   </div>
 </div>
-<app-reactice-forms [usersInfo]="_usersInfo"></app-reactice-forms>
