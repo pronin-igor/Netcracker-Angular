@@ -2,22 +2,22 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 
 import { AppComponent } from "./app.component";
-import { NewcomponentComponent } from "./newcomponent/newcomponent.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { ReacticeFormsComponent } from "./newcomponent/reactice-forms/reactice-forms.component";
+import { Module1Module } from "./modules/module1/module1.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    NewcomponentComponent,
-    ReacticeFormsComponent,
   ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        ReactiveFormsModule,
-    ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    Module1Module,
+    ReactiveFormsModule,
+  ],
   providers: [],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

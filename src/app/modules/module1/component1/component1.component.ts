@@ -1,16 +1,17 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: "app-newcomponent",
-  templateUrl: "./newcomponent.component.html",
-  styleUrls: ["./newcomponent.component.css"]
+  selector: "app-component1",
+  templateUrl: "./component1.component.html",
+  styleUrls: ["./component1.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NewcomponentComponent implements OnInit {
+export class Component1Component implements OnInit {
 
   constructor() {
     this._addButtonIsShown = false;
     this._editButtonIsShown = false;
-}
+  }
 
   ngOnInit(): void {
     console.log();
@@ -54,7 +55,7 @@ export class NewcomponentComponent implements OnInit {
     if (grade < 3 && this.hilight) {
       return true;
     }
-      return false;
+    return false;
 
   }
 
@@ -62,7 +63,7 @@ export class NewcomponentComponent implements OnInit {
     if (userName === this.name) {
       return true;
     }
-      return false;
+    return false;
   }
 
   getFilter(birthday: Date, grade: number): string {
@@ -170,13 +171,13 @@ export class NewcomponentComponent implements OnInit {
   deleteStudent(surnameToDelete: string): void {
     this._usersInfo.forEach((value, index, array) => {
       if (value.surname === surnameToDelete) {
-array.splice(index, 1);
-}
+        array.splice(index, 1);
+      }
     });
     this._usersInfoCopy.forEach((value, index, array) => {
       if (value.surname === surnameToDelete) {
-array.splice(index, 1);
-}
+        array.splice(index, 1);
+      }
     });
   }
 

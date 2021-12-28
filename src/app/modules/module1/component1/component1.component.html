@@ -3,18 +3,17 @@
     <tr><th>Name <button (click)="sortName()">Sort</button></th><th>Surname <button (click)="sortSurname()">Sort</button></th>
       <th>Patronymic <button (click)="sortPatronymic()">Sort</button></th><th>Birthday <button (click)="sortBirthday()">Sort</button></th>
       <th>Grade <button (click)="sortGrade()">Sort</button></th></tr>
-    <tr *ngFor="let user of _usersInfo"[class.gradeStyle]="getGrade(user.grade)" [class.nameStyle]="getName(user.name)"
-    [style.display]="getFilter(user.birthday, user.grade)">
-      <td >{{user.name}}</td>
+    <tr appIncrease *ngFor="let user of _usersInfo"[class.gradeStyle]="getGrade(user.grade)" [class.nameStyle]="getName(user.name)"
+        [style.display]="getFilter(user.birthday, user.grade)">
+      <td>{{user.name}}</td>
       <td>{{user.surname}}</td>
       <td>{{user.patronymic}}</td>
-      <td>{{user.birthday.toLocaleDateString()}}</td>
-      <td>{{user.grade}}</td>
+      <td>{{user.birthday | birthday}}</td>
+      <td>{{user.grade | grade}}</td>
     </tr>
   </table>
-
   <div class="inputs">
-    <button class="hilightButton" (click)="turn()">Подсветить оценки ниже 3</button>
+    <a href="#" class="butt" appColor (click)="turn()">Подсветить оценки ниже 3</a>
 
     <p>Найти по имени</p>
     <input class="input" type="text" [(ngModel)]="name">
@@ -28,9 +27,9 @@
     <p>Удалить по фамилии</p>
     <input type="text" [(ngModel)]="surnameToDelete">
 
-    <button class="buttonInBlock" (click)="textPopup.style.display='block';">Удалить</button>
-    <button class="buttonInBlock" (click)="groupPopup.style.display='block'; showAddButton()">Добавить студента</button>
-    <button class="buttonInBlock" (click)="groupPopup.style.display='block'; showEditButton()">Редактировать студента</button>
+    <a href="#" class="butt" appColor (click)="textPopup.style.display='block';">Удалить</a>
+    <a href="#" class="butt" appColor (click)="groupPopup.style.display='block'; showAddButton()">Добавить студента</a>
+    <a href="#" class="butt" appColor (click)="groupPopup.style.display='block'; showEditButton()">Редактировать студента</a>
 
     <div #textPopup class="popupStyle">
       <div class="contentForText">
@@ -43,7 +42,7 @@
     <div #groupPopup class="popupStyle">
       <div class="contentForGroup">
         <span class="close" (click)="groupPopup.style.display='none'">&times;</span>
-        <app-reactice-forms [usersInfo]="_usersInfo" [addButtonIsShown]="_addButtonIsShown"[editButtonIsShown]="_editButtonIsShown"></app-reactice-forms>
+        <app-component1p1 [usersInfo]="_usersInfo" [addButtonIsShown]="_addButtonIsShown"[editButtonIsShown]="_editButtonIsShown"></app-component1p1>
       </div>
     </div>
   </div>

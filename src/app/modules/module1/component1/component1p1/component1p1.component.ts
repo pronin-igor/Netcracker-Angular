@@ -1,22 +1,23 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from "@angular/forms";
 
 @Component({
-  selector: "app-reactice-forms",
-  templateUrl: "./reactice-forms.component.html",
-  styleUrls: ["./reactice-forms.component.css"]
+  selector: "app-component1p1",
+  templateUrl: "./component1p1.component.html",
+  styleUrls: ["./component1p1.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReacticeFormsComponent implements OnInit {
+export class Component1p1Component implements OnInit {
 
-   constructor() {
-     this.addButtonIsShown = false;
-     this.editButtonIsShown = false;
-     this.selectedUserId = -1;
-   }
+  constructor() {
+    this.addButtonIsShown = false;
+    this.editButtonIsShown = false;
+    this.selectedUserId = -1;
+  }
 
-   ngOnInit(): void {
-     console.log();
-   }
+  ngOnInit(): void {
+    console.log();
+  }
 
   @Input()
   usersInfo: { "id": number, "name": string, "surname": string, "patronymic": string, "birthday": Date, "grade": number }[] | undefined;
@@ -24,7 +25,7 @@ export class ReacticeFormsComponent implements OnInit {
   addButtonIsShown: boolean;
   @Input()
   editButtonIsShown: boolean;
-   selectedUserId: number;
+  selectedUserId: number;
 
   addFormModel = new FormGroup({
     person : new FormGroup({
@@ -35,18 +36,6 @@ export class ReacticeFormsComponent implements OnInit {
     birthday: new FormControl(new Date().toISOString().substring(0, 10), [this.validatorForDate]),
     grade: new FormControl("6", [Validators.pattern(/[1-5]/)]),
   });
-
-  // editFormModel = new FormGroup({
-  //   person : new FormGroup({
-  //     name: new FormControl("example", [Validators.required]),
-  //     surname: new FormControl("example", [Validators.required]),
-  //     patronymic: new FormControl("", [Validators.required]),
-  //   }, [this.validatorForName]),
-  //   birthday: new FormControl(new Date().toISOString().substring(0, 10), [this.validatorForDate]),
-  //   grade: new FormControl("6", [Validators.pattern(/[1-5]/)]),
-  // });
-
-
 
   validatorForDate(control: AbstractControl): ValidationErrors | null{
     const date = new Date(control.value);
@@ -70,21 +59,21 @@ export class ReacticeFormsComponent implements OnInit {
     return null;
   }
 
-   addUser(): void {
-     this.usersInfo?.push({ "id": this.usersInfo?.length,  "name": this.addFormModel.get("person")?.get("name")?.value,
-       "surname": this.addFormModel.get("person")?.get("surname")?.value, "patronymic": this.addFormModel.get("person")?.get("patronymic")?.value,
-       "birthday": new Date(this.addFormModel.controls["birthday"].value), "grade": this.addFormModel.controls["grade"].value });
-   }
+  addUser(): void {
+    this.usersInfo?.push({ "id": this.usersInfo?.length,  "name": this.addFormModel.get("person")?.get("name")?.value,
+      "surname": this.addFormModel.get("person")?.get("surname")?.value, "patronymic": this.addFormModel.get("person")?.get("patronymic")?.value,
+      "birthday": new Date(this.addFormModel.controls["birthday"].value), "grade": this.addFormModel.controls["grade"].value });
+  }
 
-   editUser(): void {
-     if (this.usersInfo) {
-       this.usersInfo[this.selectedUserId].name = this.addFormModel.get("person")?.get("name")?.value;
-       this.usersInfo[this.selectedUserId].surname = this.addFormModel.get("person")?.get("surname")?.value;
-       this.usersInfo[this.selectedUserId].patronymic = this.addFormModel.get("person")?.get("patronymic")?.value;
-       this.usersInfo[this.selectedUserId].birthday = new Date(this.addFormModel.controls["birthday"].value);
-       this.usersInfo[this.selectedUserId].grade = this.addFormModel.controls["grade"].value;
-     }
-   }
+  editUser(): void {
+    if (this.usersInfo) {
+      this.usersInfo[this.selectedUserId].name = this.addFormModel.get("person")?.get("name")?.value;
+      this.usersInfo[this.selectedUserId].surname = this.addFormModel.get("person")?.get("surname")?.value;
+      this.usersInfo[this.selectedUserId].patronymic = this.addFormModel.get("person")?.get("patronymic")?.value;
+      this.usersInfo[this.selectedUserId].birthday = new Date(this.addFormModel.controls["birthday"].value);
+      this.usersInfo[this.selectedUserId].grade = this.addFormModel.controls["grade"].value;
+    }
+  }
 
   selectOption(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
@@ -97,9 +86,6 @@ export class ReacticeFormsComponent implements OnInit {
       this.addFormModel.controls["grade"].setValue(this.usersInfo[value].grade);
     }
     this.selectedUserId = value;
-   }
+  }
 
 }
-
-
-

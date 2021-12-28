@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { ReacticeFormsComponent } from "./reactice-forms.component";
+import { Component1p1Component } from "./component1p1.component";
 
-describe("ReacticeFormsComponent", () => {
-  let component: ReacticeFormsComponent;
-  let fixture: ComponentFixture<ReacticeFormsComponent>;
+describe("Component1p1Component", () => {
+  let component: Component1p1Component;
+  let fixture: ComponentFixture<Component1p1Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ReacticeFormsComponent ]
+      declarations: [ Component1p1Component ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ReacticeFormsComponent);
+    fixture = TestBed.createComponent(Component1p1Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
