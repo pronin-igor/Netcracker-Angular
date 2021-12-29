@@ -63,6 +63,12 @@ export class ReactiveFormComponent implements OnInit {
     this.usersInfo?.push({ "id": this.usersInfo?.length,  "name": this.addFormModel.get("person")?.get("name")?.value,
       "surname": this.addFormModel.get("person")?.get("surname")?.value, "patronymic": this.addFormModel.get("person")?.get("patronymic")?.value,
       "birthday": new Date(this.addFormModel.controls["birthday"].value), "grade": this.addFormModel.controls["grade"].value });
+
+    this.addFormModel.get("person")?.get("name")?.setValue("");
+    this.addFormModel.get("person")?.get("surname")?.setValue("");
+    this.addFormModel.get("person")?.get("patronymic")?.setValue("");
+    this.addFormModel.controls["birthday"].setValue("");
+    this.addFormModel.controls["grade"].setValue("");
   }
 
   editUser(): void {
