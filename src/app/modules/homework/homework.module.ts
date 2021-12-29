@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { Component1Component } from "./component1/component1.component";
-import { Component1p1Component } from "./component1/component1p1/component1p1.component";
+import { StudentsTableComponent } from "./studentsTable/studentsTable.component";
+import { ReactiveFormComponent } from "./studentsTable/reactiveForm/reactiveForm.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { IncreaseDirective } from "./increase.directive";
 import { ColorDirective } from "./color.directive";
@@ -12,13 +12,13 @@ import { GradePipe } from "./grade.pipe";
   declarations: [
     BirthdayPipe,
     ColorDirective,
-    Component1Component,
-    Component1p1Component,
     GradePipe,
     IncreaseDirective,
+    ReactiveFormComponent,
+    StudentsTableComponent,
   ],
   exports: [
-    Component1Component,
+    StudentsTableComponent,
   ],
   imports: [
     CommonModule,
@@ -26,4 +26,4 @@ import { GradePipe } from "./grade.pipe";
     ReactiveFormsModule,
   ]
 })
-export class Module1Module { }
+export class HomeworkModule { }

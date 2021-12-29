@@ -13,7 +13,7 @@
     </tr>
   </table>
   <div class="inputs">
-    <a href="#" class="butt" appColor (click)="turn()">Подсветить оценки ниже 3</a>
+    <a href="#" class="butt" appColor [styleObject]="_styleObject" (click)="turn()" (appColorClick)="changeDirectiveColor()">Подсветить оценки ниже 3</a>
 
     <p>Найти по имени</p>
     <input class="input" type="text" [(ngModel)]="name">
@@ -27,9 +27,9 @@
     <p>Удалить по фамилии</p>
     <input type="text" [(ngModel)]="surnameToDelete">
 
-    <a href="#" class="butt" appColor (click)="textPopup.style.display='block';">Удалить</a>
-    <a href="#" class="butt" appColor (click)="groupPopup.style.display='block'; showAddButton()">Добавить студента</a>
-    <a href="#" class="butt" appColor (click)="groupPopup.style.display='block'; showEditButton()">Редактировать студента</a>
+    <a href="#" class="butt" appColor [styleObject]="_styleObject" (click)="textPopup.style.display='block';" (appColorClick)="changeDirectiveColor()">Удалить</a>
+    <a href="#" class="butt" appColor [styleObject]="_styleObject" (click)="groupPopup.style.display='block'; showAddButton()" (appColorClick)="changeDirectiveColor()">Добавить студента</a>
+    <a href="#" class="butt" appColor [styleObject]="_styleObject" (click)="groupPopup.style.display='block'; showEditButton()" (appColorClick)="changeDirectiveColor()">Редактировать студента</a>
 
     <div #textPopup class="popupStyle">
       <div class="contentForText">

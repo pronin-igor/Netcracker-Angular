@@ -3,7 +3,7 @@ import { BrowserModule } from "@angular/platform-browser";
 
 import { AppComponent } from "./app.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { Module1Module } from "./modules/module1/module1.module";
+import { HomeworkModule } from "./modules/homework/homework.module";
 
 @NgModule({
   declarations: [
@@ -12,7 +12,7 @@ import { Module1Module } from "./modules/module1/module1.module";
   imports: [
     BrowserModule,
     FormsModule,
-    Module1Module,
+    HomeworkModule,
     ReactiveFormsModule,
   ],
   providers: [],

@@ -3,11 +3,11 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators }
 
 @Component({
   selector: "app-component1p1",
-  templateUrl: "./component1p1.component.html",
-  styleUrls: ["./component1p1.component.css"],
+  templateUrl: "./reactiveForm.component.html",
+  styleUrls: ["./reactiveForm.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Component1p1Component implements OnInit {
+export class ReactiveFormComponent implements OnInit {
 
   constructor() {
     this.addButtonIsShown = false;
@@ -72,7 +72,14 @@ export class Component1p1Component implements OnInit {
       this.usersInfo[this.selectedUserId].patronymic = this.addFormModel.get("person")?.get("patronymic")?.value;
       this.usersInfo[this.selectedUserId].birthday = new Date(this.addFormModel.controls["birthday"].value);
       this.usersInfo[this.selectedUserId].grade = this.addFormModel.controls["grade"].value;
+
+      this.addFormModel.get("person")?.get("name")?.setValue("");
+      this.addFormModel.get("person")?.get("surname")?.setValue("");
+      this.addFormModel.get("person")?.get("patronymic")?.setValue("");
+      this.addFormModel.controls["birthday"].setValue("");
+      this.addFormModel.controls["grade"].setValue("");
     }
+
   }
 
   selectOption(event: Event): void {

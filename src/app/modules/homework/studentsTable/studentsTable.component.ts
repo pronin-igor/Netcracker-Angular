@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 
 @Component({
   selector: "app-component1",
-  templateUrl: "./component1.component.html",
-  styleUrls: ["./component1.component.css"],
+  templateUrl: "./studentsTable.component.html",
+  styleUrls: ["./studentsTable.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Component1Component implements OnInit {
+export class StudentsTableComponent implements OnInit {
 
   constructor() {
     this._addButtonIsShown = false;
@@ -16,6 +16,11 @@ export class Component1Component implements OnInit {
   ngOnInit(): void {
     console.log();
   }
+
+  _styleObject = {
+    color: "red",
+    border: "3px solid red",
+  };
 
   _usersInfo = [
     { "id": 0, "name": "Ваня", "surname": "Иванов", "patronymic": "Иванович", "birthday": new Date(2000, 4, 20), "grade": 5 },
@@ -189,6 +194,16 @@ export class Component1Component implements OnInit {
   showEditButton(): void {
     this._editButtonIsShown = true;
     this._addButtonIsShown = false;
+  }
+
+  changeDirectiveColor(): void {
+      const letters = "0123456789ABCDEF";
+      let color = "#";
+      for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    this._styleObject.color = color;
+    this._styleObject.border = "3px solid" + color;
   }
 
 }
