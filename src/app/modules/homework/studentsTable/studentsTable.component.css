@@ -85,3 +85,7 @@ input {
   font-family: Arial, sans-serif;
   margin-top: 10px;
 }
+
+.active{
+  color: red;
+}

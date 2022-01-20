@@ -35,14 +35,14 @@
   </div>
 </form>
 
-<select id="userSelect" [hidden]="!this.editButtonIsShown" (change)="selectOption($event)">
+<select id="userSelect" [hidden]="!this.selectButtonIsShown" (change)="selectOption($event)">
   <option *ngFor="let user of this.usersInfo" [value]="user.id" [text]="user.name + ' ' + user.surname + ' ' + user.patronymic"></option>
 </select>
 
-<button (click)="addUser()" [hidden]="!this.addButtonIsShown" [disabled]="!this.addFormModel.valid">Добавить</button>
-<button (click)="editUser()" [hidden]="!this.editButtonIsShown" [disabled]="!this.addFormModel.valid || this.selectedUserId === -1">Отредактировать</button>
+<button (click)="newAddUser()" [hidden]="!this.addButtonIsShown" [disabled]="!this.addFormModel.valid">Добавить</button>
+<button (click)="newEditUser()" [hidden]="!this.editButtonIsShown" [disabled]="!this.addFormModel.valid || this.selectedUserId === -1">Отредактировать</button>
 
-<div class="alert" *ngIf="this.selectedUserId === -1" [hidden]="!this.editButtonIsShown">
+<div class="alert" *ngIf="this.selectedUserId === -1" [hidden]="!this.selectButtonIsShown">
   Выберите пользователя из списка для редактирования
 </div>
 

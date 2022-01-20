@@ -1,39 +1,55 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { ServerService } from "../Services/serverService.service";
+import { HardcodedService } from "../Services/hardcodedService.service";
 
 @Component({
-  selector: "app-component1",
+  selector: "StudentsTable",
   templateUrl: "./studentsTable.component.html",
   styleUrls: ["./studentsTable.component.css"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StudentsTableComponent implements OnInit {
 
-  constructor() {
-    this._addButtonIsShown = false;
-    this._editButtonIsShown = false;
+  constructor(public serverService: ServerService, private hardcodedService: HardcodedService,
+              public activatedRoute: ActivatedRoute, private ref: ChangeDetectorRef) {
+    console.log("StudentsTableComponent work");
   }
 
+   _usersInfo: { birthday: Date, patronymic: string, surname: string, grade: number, name: string, id: number }[] = [];
+
   ngOnInit(): void {
-    console.log();
+    if (this.activatedRoute.snapshot.url[1] && this.activatedRoute.snapshot.url[1].path === "addStudent") {
+      const groupPopup = document.getElementById("groupPopup");
+      if (groupPopup) {
+        groupPopup.style.display = "block";
+      }
+      this._addButtonIsShown = true;
+      this._editButtonIsShown = false;
+    }
+
+    if (this.activatedRoute.snapshot.url[1] && this.activatedRoute.snapshot.url[1].path === "editStudent") {
+      const groupPopup = document.getElementById("groupPopup");
+      if (groupPopup) {
+        groupPopup.style.display = "block";
+      }
+      this._addButtonIsShown = false;
+      this._editButtonIsShown = true;
+      this._selectButtonIsShown = false;
+    }
+
+    this.activatedRoute.queryParams.subscribe( (next) => {
+          this.debug = next["debug"];
+          this.fabric(this.debug);
+          this.ref.markForCheck();
+        });
+
   }
 
   _styleObject = {
     color: "red",
     border: "3px solid red",
   };
-
-  _usersInfo = [
-    { "id": 0, "name": "Ваня", "surname": "Иванов", "patronymic": "Иванович", "birthday": new Date(2000, 4, 20), "grade": 5 },
-    { "id": 1, "name": "Петя", "surname": "Петров", "patronymic": "Петрович", "birthday": new Date(1997, 11, 24), "grade": 4 },
-    { "id": 2, "name": "Игорь", "surname": "Игорев", "patronymic": "Игоревич", "birthday": new Date(1997, 11, 23), "grade": 2 },
-    { "id": 3, "name": "Костя", "surname": "Костев", "patronymic": "Константинович", "birthday": new Date(1980, 2, 27), "grade": 1 },
-    { "id": 4, "name": "Кирилл", "surname": "Кириллов", "patronymic": "Кириллович", "birthday": new Date(2002, 5, 21), "grade": 3 },
-    { "id": 5, "name": "Никита", "surname": "Никитов", "patronymic": "Никитович", "birthday": new Date(1996, 11, 14), "grade": 5 },
-    { "id": 6, "name": "Саша", "surname": "Сашев", "patronymic": "Александрович", "birthday": new Date(2008, 7, 7), "grade": 3 },
-    { "id": 7, "name": "Юра", "surname": "Юров", "patronymic": "Юрьевич", "birthday": new Date(2017, 6, 3), "grade": 2 },
-    { "id": 8, "name": "Денис", "surname": "Денисов", "patronymic": "Денисович", "birthday": new Date(2019, 3, 29), "grade": 1 },
-    { "id": 9, "name": "Илья", "surname": "Ильев", "patronymic": "Ильевич", "birthday": new Date(2020, 8, -18), "grade": 4 },
-  ];
 
   _usersInfoCopy = this._usersInfo.slice();
 
@@ -49,8 +65,22 @@ export class StudentsTableComponent implements OnInit {
   birthdaySorted = false;
   gradeSorted = false;
   surnameToDelete: string = "";
-  _addButtonIsShown: boolean;
-  _editButtonIsShown: boolean;
+  _addButtonIsShown = false;
+  _editButtonIsShown = false;
+  _selectButtonIsShown = false;
+  debug = "";
+
+  fabric(type: string): void {
+    if (type === "true") {
+      this._usersInfo = this.hardcodedService.usersInfo;
+    } else {
+      this._usersInfo = this.serverService.usersInfo;
+      this.serverService.stringVar$.subscribe((data) => {
+        this._usersInfo = this.serverService.usersInfo;
+        this.ref.markForCheck();
+      });
+      }
+  }
 
   turn(): void {
     this.hilight = !this.hilight;
@@ -189,11 +219,13 @@ export class StudentsTableComponent implements OnInit {
   showAddButton(): void {
     this._addButtonIsShown = true;
     this._editButtonIsShown = false;
+    this._selectButtonIsShown = false;
   }
 
   showEditButton(): void {
     this._editButtonIsShown = true;
     this._addButtonIsShown = false;
+    this._selectButtonIsShown = true;
   }
 
   changeDirectiveColor(): void {

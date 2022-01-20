@@ -9,12 +9,13 @@ export class BirthdayPipe implements PipeTransform {
 
   transform(date: Date): string {
     let zodiac: string = "";
-    if (date.getDay() > 20) {
-      zodiac = this.zodiacs[date.getMonth() + 1];
+    const newDate = new Date(date);
+    if (newDate.getDay() > 20) {
+      zodiac = this.zodiacs[newDate.getMonth() + 1];
     } else {
-      zodiac = this.zodiacs[date.getMonth()];
+      zodiac = this.zodiacs[newDate.getMonth()];
     }
-    const dateWithZodiac = date.toLocaleDateString() + "(" + zodiac + ")";
+    const dateWithZodiac = newDate.toLocaleDateString() + "(" + zodiac + ")";
     return dateWithZodiac;
   }
 

@@ -10,6 +10,7 @@
       <td>{{user.patronymic}}</td>
       <td>{{user.birthday | birthday}}</td>
       <td>{{user.grade | grade}}</td>
+      <a [routerLink]="['/action', 'editStudent', user.id]" [queryParams]="{debug: this.activatedRoute.snapshot.queryParams['debug']}" routerLinkActive="active">Редактировать пользователя</a>
     </tr>
   </table>
   <div class="inputs">
@@ -31,7 +32,7 @@
     <a href="#" class="butt" appColor [styleObject]="_styleObject" (click)="groupPopup.style.display='block'; showAddButton()" (appColorClick)="changeDirectiveColor()">Добавить студента</a>
     <a href="#" class="butt" appColor [styleObject]="_styleObject" (click)="groupPopup.style.display='block'; showEditButton()" (appColorClick)="changeDirectiveColor()">Редактировать студента</a>
 
-    <div #textPopup class="popupStyle">
+    <div #textPopup class="popupStyle" id="textPopup">
       <div class="contentForText">
         <span class="close" (click)="textPopup.style.display='none'">&times;</span>
         <p>Уверены, что хотите удалить ученика с фамилией {{surnameToDelete}}?</p>
@@ -39,10 +40,11 @@
       </div>
     </div>
 
-    <div #groupPopup class="popupStyle">
+    <div #groupPopup class="popupStyle" id="groupPopup">
       <div class="contentForGroup">
-        <span class="close" (click)="groupPopup.style.display='none'">&times;</span>
-        <app-component1p1 [usersInfo]="_usersInfo" [addButtonIsShown]="_addButtonIsShown"[editButtonIsShown]="_editButtonIsShown"></app-component1p1>
+<!--        <span class="close" (click)="groupPopup.style.display='none'">&times;</span>-->
+        <a routerLink="" [queryParams]="{debug: this.activatedRoute.snapshot.queryParams['debug']}" routerLinkActive="active">&times;</a>
+        <ReacticeForm [usersInfo]="_usersInfo" [addButtonIsShown]="_addButtonIsShown"[editButtonIsShown]="_editButtonIsShown" [selectButtonIsShown]="_selectButtonIsShown"></ReacticeForm>
       </div>
     </div>
   </div>

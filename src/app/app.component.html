@@ -1,1 +1,8 @@
-<app-component1></app-component1>
+<div class="links">
+<a routerLink="" [queryParams]="{debug: 'false'}" routerLinkActive="active">Загрузить таблицу с сервера</a>
+<a routerLink="" [queryParams]="{debug: 'true'}" routerLinkActive="active">Взять таблицу с хардкода</a>
+<a [routerLink]="['action', 'addStudent']" [queryParams]="{debug: this.activatedRoute.snapshot.queryParams['debug']}" routerLinkActive="active">Добавление пользователя</a>
+<!--  <a [routerLink]="['action', 'editStudent', '5']" [queryParams]="{debug: this.activatedRoute.snapshot.queryParams['debug']}" routerLinkActive="active">Редактировать пользователя</a>-->
+<a routerLink="blablabla" routerLinkActive="active">Страница ошибки</a>
+</div>
+<router-outlet></router-outlet>
